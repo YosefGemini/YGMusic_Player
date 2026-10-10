@@ -23,6 +23,34 @@ npx expo install --fix      # fix incompatible package versions
 
 Run lint and typecheck before declaring any task done.
 
+## YGMusic Player specifics
+
+This project uses **NativeWind v4** (Tailwind), **expo-router** (`src/app`),
+**expo-sqlite + Drizzle**, and **react-native-audio-api**. Screaming
+architecture: keep engines in `src/core`, feature slices in `src/features`, and
+routes thin in `src/app`.
+
+**Android builds require JDK 17** (the system JDK 26/27 is too new) and
+`ANDROID_HOME`. Always source the env script first:
+
+```bash
+source scripts/android-env.sh
+```
+
+Commands (run all before finishing work):
+
+```bash
+npm run typecheck   # tsc --noEmit
+npm run lint        # eslint
+npm test            # jest
+npm run test:coverage
+npm run db:generate # regenerate SQL migrations from the Drizzle schema
+```
+
+A task is not done until: tests pass, lint + typecheck are clean, and the
+matching `feature-documentation/<feature>.md` file and `TESTS.md` are updated.
+
+
 ## Navigation & Routing
 
 - Use **Expo Router** for all navigation. Routes live in `src/app/` — every file there is a screen, `_layout.tsx` files define navigators. Keep non-route code (components, hooks, utils) outside `src/app/`.

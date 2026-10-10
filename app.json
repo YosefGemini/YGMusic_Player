@@ -1,17 +1,20 @@
 {
   "expo": {
-    "name": "YGMusic_Player",
-    "slug": "YGMusic_Player",
+    "name": "YGMusic Player",
+    "slug": "ygmusic-player",
+    "scheme": "ygmusic",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ygmusic.player"
     },
     "android": {
+      "package": "com.ygmusic.player",
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#0A0A0E",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
@@ -19,7 +22,32 @@
       "predictiveBackGestureEnabled": false
     },
     "web": {
+      "bundler": "metro",
+      "output": "static",
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-sqlite",
+      "expo-image",
+      "expo-router",
+      [
+        "react-native-audio-api",
+        {
+          "iosBackgroundMode": true,
+          "iosMicrophonePermission": "YGMusic Player does not record audio; this entry is required by the audio engine.",
+          "androidForegroundService": true,
+          "androidFSTypes": ["mediaPlayback"],
+          "androidPermissions": [
+            "android.permission.MODIFY_AUDIO_SETTINGS",
+            "android.permission.FOREGROUND_SERVICE",
+            "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK",
+            "android.permission.POST_NOTIFICATIONS"
+          ]
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
     }
   }
 }

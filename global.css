@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-background: 10 10 14;
+  --color-surface: 22 22 30;
+  --color-surface-elevated: 34 34 46;
+  --color-foreground: 244 244 248;
+  --color-muted: 148 148 164;
+  --color-primary: 122 92 255;
+  --color-primary-foreground: 255 255 255;
+  --color-accent: 0 209 178;
+  --color-border: 48 48 62;
+  --radius-theme: 16px;
+}
