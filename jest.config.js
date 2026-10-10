@@ -10,9 +10,20 @@ module.exports = {
   ],
   collectCoverageFrom: [
     "src/**/*.{ts,tsx}",
+    // Type-only modules have no runnable code.
     "!src/**/*.d.ts",
-    "!src/app/**",
+    "!src/**/types.ts",
+    // Barrel files.
     "!src/**/index.ts",
+    // Routes.
+    "!src/app/**",
+    // Platform glue validated on device (SAF/MediaStore, SQL, screens).
+    "!src/core/db/client.ts",
+    "!src/core/db/repositories/**",
+    "!src/core/files/listers/**",
+    "!src/features/**",
+    // NativeWind interop wrapper (no logic).
+    "!src/shared/ui/icons.ts",
   ],
   coverageThreshold: {
     global: {

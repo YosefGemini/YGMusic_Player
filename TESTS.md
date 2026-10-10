@@ -28,10 +28,13 @@ npm run lint           # eslint
 
 ## Coverage gate
 
-Configured in `jest.config.js`. Current result (Phase 1):
+Configured in `jest.config.js` (statements 70, branches 60, fns 70, lines 70).
+Platform glue with no Jest analogue — native listers, SQL repositories, feature
+screens, routes, and type-only/barrel files — is excluded from the denominator
+and validated on device instead. Current result (Phase 2):
 
 ```
-All files    | 86.95% stmts | 80.82% branch | 79.06% funcs | 87.80% lines
+All files    | 89.11% stmts | 83.33% branch | 80.85% funcs | 90.18% lines
 ```
 
 ## Test matrix
@@ -53,8 +56,14 @@ All files    | 86.95% stmts | 80.82% branch | 79.06% funcs | 87.80% lines
 | Settings store | `src/store/__tests__/settingsStore.test.ts` | defaults, updates, reset |
 | Slider math | `src/shared/ui/__tests__/sliderMath.test.ts` | ratio/value mapping + clamping |
 | UI components | `src/shared/ui/__tests__/*.test.tsx` | Button, Screen, EmptyState, ScreenHeader, AlbumArt, Slider |
+| Audio extensions | `src/core/files/__tests__/audioExtensions.test.ts` | extension parsing + audio detection |
+| Folder tree | `src/core/files/__tests__/folderTree.test.ts` | nesting, orphan parents, empty |
+| Filename parsing | `src/core/metadata/__tests__/parseFilename.test.ts` | artist/title/track patterns |
+| Metadata provider | `src/core/metadata/__tests__/filenameProvider.test.ts` | provider mapping |
+| Library scanner | `src/core/library/__tests__/scanner.test.ts` | create/skip/update/remove/errors/aggregate |
+| Library modules | `src/core/library/__tests__/modules.test.ts` | services + registry capabilities |
 
-Totals at Phase 1: **20 suites · 82 tests · all passing**.
+Totals at Phase 2: **26 suites · 105 tests · all passing**.
 
 ## Device validation checklist
 
@@ -71,3 +80,11 @@ Totals at Phase 1: **20 suites · 82 tests · all passing**.
 - [x] Library-mode selection updates (`Whole device` ↔ `Selected folders only`)
 - [x] Ionicons follow the theme after the `cssInterop` fix
 - [x] `DatabaseProvider` gates the app on migrations (no error screen)
+
+### Phase 2 (Pixel_3a_API_34)
+- [x] Rebuild with `expo-file-system` + `expo-media-library` → BUILD SUCCESSFUL
+- [x] App boots with the regenerated migration; no crash
+- [x] Folders screen renders (device-mode card + empty state)
+- [x] **Add folder** opens the system directory picker (`com.google.android.documentsui`)
+- [x] **Scan device library** inserts a folder live and completes a scan
+      (MediaStore → scanner → SQLite → live UI)

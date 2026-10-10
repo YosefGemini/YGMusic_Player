@@ -36,7 +36,9 @@
           "iosBackgroundMode": true,
           "iosMicrophonePermission": "YGMusic Player does not record audio; this entry is required by the audio engine.",
           "androidForegroundService": true,
-          "androidFSTypes": ["mediaPlayback"],
+          "androidFSTypes": [
+            "mediaPlayback"
+          ],
           "androidPermissions": [
             "android.permission.MODIFY_AUDIO_SETTINGS",
             "android.permission.FOREGROUND_SERVICE",
@@ -44,7 +46,19 @@
             "android.permission.POST_NOTIFICATIONS"
           ]
         }
-      ]
+      ],
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "YGMusic Player reads your audio library so you can import your music.",
+          "savePhotosPermission": false,
+          "isAccessMediaLocationEnabled": false,
+          "granularPermissions": [
+            "audio"
+          ]
+        }
+      ],
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true

@@ -1,10 +1,11 @@
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useEffect } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { DatabaseProvider } from "@/core/db/DatabaseProvider";
 import { ThemeProvider } from "@/core/theme/ThemeProvider";
+import { registerLibraryModules } from "@/features/library-folders";
 import { useSettingsStore } from "@/store/settingsStore";
 
 import "../../global.css";
@@ -12,6 +13,10 @@ import "../../global.css";
 export default function RootLayout() {
   const themeId = useSettingsStore((state) => state.themeId);
   const setThemeId = useSettingsStore((state) => state.setThemeId);
+
+  useEffect(() => {
+    registerLibraryModules();
+  }, []);
 
   return (
     <SafeAreaProvider>

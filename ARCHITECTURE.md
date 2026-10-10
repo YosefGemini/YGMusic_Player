@@ -11,11 +11,12 @@ src/
   app/            Routes. Expo Router files only; no business logic.
   core/           Framework-agnostic engines and contracts.
     audio/        Equalizer graph, player engine, queue logic.
-    db/           Drizzle schema, migrations, connection, DatabaseProvider.
+    db/           Drizzle schema, migrations, connection, DatabaseProvider, repositories.
     theme/        Design tokens + controlled ThemeProvider.
     plugins/      Module registry + capability interfaces.
-    files/        SAF / MediaStore access.                   (Phase 2)
-    metadata/     Tag parsing behind a provider interface.   (Phase 2)
+    files/        SAF / MediaStore access + folder tree.
+    metadata/     Metadata provider (filename parser; native tags later).
+    library/      Incremental scan pipeline (ports + scanner + modules).
   features/       Vertical slices: player, library-*, playlists, settings, themes.
   shared/         Reusable UI (design system), hooks, utils.
   store/          Zustand stores (player + settings).
@@ -67,6 +68,20 @@ Tables: `tracks`, `artists`, `albums`, `folders`, `playlists`,
 
 `scan_cache` enables incremental library scans: files whose mtime/size are
 unchanged are skipped.
+
+## Library ingestion
+
+```
+FileLister (SAF / MediaStore) ──▶ LibraryScanner ──▶ MetadataProvider (filename…)
+                                        │                    │
+                                        ▼                    ▼
+                                 ScanRepository  ──▶  artists / albums / tracks / scan_cache
+```
+
+The scanner depends only on ports (`FileLister`, `MetadataProvider`,
+`ScanRepository`), so it is unit-tested with fakes and wired to SQLite/native
+implementations in `src/features/library-folders/dependencies.ts`. The feature is
+the only place that composes `core` engines with the platform.
 
 ## Theme architecture
 

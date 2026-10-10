@@ -24,13 +24,15 @@ Status legend: `[x]` done · `[~]` in progress · `[ ]` pending
 - [x] Settings screen: library mode, theme selection
 - [ ] Album cover `Carousel` primitive (deferred to Phase 3 with the Albums page)
 
-## Phase 2 — Library ingestion `[ ]`
+## Phase 2 — Library ingestion `[x]`
 
-- [ ] Android SAF folder picker + persisted access
-- [ ] Optional whole-device scan (MediaStore)
-- [ ] Metadata/tag parsing behind `MetadataProvider`
-- [ ] Incremental scan pipeline using `scan_cache`
-- [ ] Folders page with drill-down
+- [x] Android SAF folder picker (`Directory.pickDirectoryAsync`) + persist grant row
+- [x] Optional whole-device scan (MediaStore via `expo-media-library`)
+- [x] Metadata parsing behind `MetadataProvider` (filename provider)
+- [x] Incremental scan pipeline using `scan_cache`
+- [x] Folders page (list/add/scan/remove; device scan)
+- [ ] Cross-restart SAF permission persistence (`takePersistableUriPermission`)
+- [ ] Subfolder drill-down UI (`buildFolderTree` is ready)
 
 ## Phase 3 — Browsing `[ ]`
 

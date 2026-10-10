@@ -79,7 +79,7 @@ export const folders = sqliteTable(
     id: id(),
     uri: text("uri").notNull(),
     name: text("name").notNull(),
-    parentId: text("parent_id"),
+    parentUri: text("parent_uri"),
     accessMode: text("access_mode", { enum: ["saf", "mediastore", "path"] })
       .notNull()
       .default("saf"),
@@ -90,7 +90,7 @@ export const folders = sqliteTable(
   },
   (t) => ({
     uriIdx: uniqueIndex("folders_uri_idx").on(t.uri),
-    parentIdx: index("folders_parent_idx").on(t.parentId),
+    parentIdx: index("folders_parent_idx").on(t.parentUri),
   }),
 );
 

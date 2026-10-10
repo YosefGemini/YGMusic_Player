@@ -48,5 +48,7 @@ looks and behaves.
   verified Android build and runtime.
 - **Phase 1 — complete**: module registry, Zustand stores, `DatabaseProvider`
   migrations, design system, navigation shell, settings screen; verified on device.
-- Next: **Phase 2 — library ingestion** (SAF folder picker, metadata parsing,
-  incremental scan, Folders page).
+- **Phase 2 — complete**: SAF folder picker, MediaStore scan, filename metadata
+  provider, incremental scan pipeline, SQLite repositories, Folders screen;
+  verified on device.
+- Next: **Phase 3 — browsing** (Songs, Artists, Albums carousel, Folders drill-down).

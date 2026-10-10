@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "541abdef-6e38-44c1-871b-31178594d29f",
+  "id": "d3b3f462-8531-4b70-aa2e-1b1b890d683e",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "albums": {
@@ -232,8 +232,8 @@
           "notNull": true,
           "autoincrement": false
         },
-        "parent_id": {
-          "name": "parent_id",
+        "parent_uri": {
+          "name": "parent_uri",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
@@ -274,7 +274,7 @@
         "folders_parent_idx": {
           "name": "folders_parent_idx",
           "columns": [
-            "parent_id"
+            "parent_uri"
           ],
           "isUnique": false
         }

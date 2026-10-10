@@ -34,14 +34,14 @@ CREATE TABLE `folders` (
 	`id` text PRIMARY KEY NOT NULL,
 	`uri` text NOT NULL,
 	`name` text NOT NULL,
-	`parent_id` text,
+	`parent_uri` text,
 	`access_mode` text DEFAULT 'saf' NOT NULL,
 	`scan_enabled` integer DEFAULT true NOT NULL,
 	`created_at` integer NOT NULL
 );
 --> statement-breakpoint
 CREATE UNIQUE INDEX `folders_uri_idx` ON `folders` (`uri`);--> statement-breakpoint
-CREATE INDEX `folders_parent_idx` ON `folders` (`parent_id`);--> statement-breakpoint
+CREATE INDEX `folders_parent_idx` ON `folders` (`parent_uri`);--> statement-breakpoint
 CREATE TABLE `playlist_items` (
 	`id` text PRIMARY KEY NOT NULL,
 	`playlist_id` text NOT NULL,
