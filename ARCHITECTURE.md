@@ -11,14 +11,14 @@ src/
   app/            Routes. Expo Router files only; no business logic.
   core/           Framework-agnostic engines and contracts.
     audio/        Equalizer graph, player engine, queue logic.
-    db/           Drizzle schema, migrations, connection.
-    theme/        Design tokens + ThemeProvider.
-    plugins/      Module registry + capability interfaces.   (Phase 1)
+    db/           Drizzle schema, migrations, connection, DatabaseProvider.
+    theme/        Design tokens + controlled ThemeProvider.
+    plugins/      Module registry + capability interfaces.
     files/        SAF / MediaStore access.                   (Phase 2)
     metadata/     Tag parsing behind a provider interface.   (Phase 2)
   features/       Vertical slices: player, library-*, playlists, settings, themes.
   shared/         Reusable UI (design system), hooks, utils.
-  store/          Zustand stores (player/UI).                (Phase 1)
+  store/          Zustand stores (player + settings).
 ```
 
 Rules:
@@ -79,7 +79,7 @@ unchanged are skipped.
 - Future **user themes** are plain JSON/`ThemeTokens` objects passed to
   `ThemeProvider` — no rebuild required.
 
-## Extensibility: module registry (Phase 1)
+## Extensibility: module registry
 
 The registry maps capability keys to implementations:
 

@@ -28,10 +28,10 @@ npm run lint           # eslint
 
 ## Coverage gate
 
-Configured in `jest.config.js`. Current result (Phase 0):
+Configured in `jest.config.js`. Current result (Phase 1):
 
 ```
-All files    | 80.37% stmts | 75.39% branch | 70.64% funcs | 81.40% lines
+All files    | 86.95% stmts | 80.82% branch | 79.06% funcs | 87.80% lines
 ```
 
 ## Test matrix
@@ -43,19 +43,31 @@ All files    | 80.37% stmts | 75.39% branch | 70.64% funcs | 81.40% lines
 | EQ graph | `src/core/audio/equalizer/__tests__/equalizerGraph.test.ts` | filter chain wiring, gain/preamp application, bypass, dispose |
 | Player queue | `src/core/audio/player/__tests__/queue.test.ts` | repeat off/all/one, shuffle, next/prev, jump, empty library |
 | Player engine | `src/core/audio/player/__tests__/playerEngine.test.ts` | graph→destination wiring, load/decode, play/pause/stop, errors |
-| Theme tokens | `src/core/theme/__tests__/tokens.test.ts` | built-in set, resolve/fallback, CSS vars, hex conversion |
+| Theme tokens | `src/core/theme/__tests__/tokens.test.ts` | built-in set, resolve/fallback, CSS vars, color conversion |
+| Theme provider | `src/core/theme/__tests__/ThemeProvider.test.tsx` | provides theme, notifies owner, throws outside provider |
 | DB schema | `src/core/db/__tests__/schema.test.ts` | id generation, table names, core track fields |
+| DB migration state | `src/core/db/__tests__/migrationState.test.ts` | loading/ready/error decision |
+| DB provider | `src/core/db/__tests__/DatabaseProvider.test.tsx` | loading/ready/error render gate |
+| Module registry | `src/core/plugins/__tests__/registry.test.ts` | register/dupes, capability filter, enable/disable, bootstrap lifecycle |
+| Player store | `src/store/__tests__/playerStore.test.ts` | queue/derived state, transport, repeat/shuffle, jump, clear |
+| Settings store | `src/store/__tests__/settingsStore.test.ts` | defaults, updates, reset |
+| Slider math | `src/shared/ui/__tests__/sliderMath.test.ts` | ratio/value mapping + clamping |
+| UI components | `src/shared/ui/__tests__/*.test.tsx` | Button, Screen, EmptyState, ScreenHeader, AlbumArt, Slider |
 
-Totals at Phase 0: **7 suites · 37 tests · all passing**.
+Totals at Phase 1: **20 suites · 82 tests · all passing**.
 
-## Device validation checklist (Phase 0)
+## Device validation checklist
 
-Performed on `Pixel_3a_API_34` emulator:
+### Phase 0 (Pixel_3a_API_34)
+- [x] `./gradlew :app:assembleDebug` → BUILD SUCCESSFUL
+- [x] App launches; no JS/native crashes
+- [x] Theme switching + queue advance work
+- [x] Native audio initializes (`OboeAudio … openStreamInternal()`, `requestAudioFocus()`)
 
-- [x] `./gradlew :app:assembleDebug` → BUILD SUCCESSFUL (94 MB APK)
-- [x] Metro bundle served without errors (1755 modules)
-- [x] App launches; `MainActivity` resumed; no JS/native crashes in logcat
-- [x] Theme switching (Midnight → OLED Black) updates colors live
-- [x] Queue "Next" advances the current track
-- [x] Native audio engine initializes: logcat shows `OboeAudio … openStreamInternal()`
-      and `requestAudioFocus()` from `com.swmansion.audioapi`
+### Phase 1 (Pixel_3a_API_34)
+- [x] Rebuild with `expo-font` linked → BUILD SUCCESSFUL
+- [x] Bottom tabs render and navigate (Songs/Artists/Albums/Folders/Playlists)
+- [x] Settings modal opens; theme switch Midnight → Daylight flips the whole UI
+- [x] Library-mode selection updates (`Whole device` ↔ `Selected folders only`)
+- [x] Ionicons follow the theme after the `cssInterop` fix
+- [x] `DatabaseProvider` gates the app on migrations (no error screen)

@@ -4,6 +4,7 @@ import {
   hexToRgbTriplet,
   resolveTheme,
   themeToCssVars,
+  tripletToColor,
   type ThemeTokens,
 } from "../tokens";
 
@@ -44,5 +45,10 @@ describe("theme tokens", () => {
     expect(hexToRgbTriplet("ff8800")).toBe("255 136 0");
     expect(() => hexToRgbTriplet("#zzz")).toThrow();
     expect(() => hexToRgbTriplet("not-a-color")).toThrow();
+  });
+
+  it("converts triplets to CSS color strings", () => {
+    expect(tripletToColor("10 10 14")).toBe("rgba(10, 10, 14, 1)");
+    expect(tripletToColor("122 92 255", 0.5)).toBe("rgba(122, 92, 255, 0.5)");
   });
 });

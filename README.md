@@ -10,8 +10,9 @@ control over what the app can see, and is built to be themed and extended.
   new looks and features can be added without rewiring the app.
 - **Real audio DSP.** 15-band equalizer with presets plus bass/immersive effects.
 
-> Status: **Phase 0 complete** — toolchain, app shell, core engines, tests, and a
-> verified native Android build. See [`TODO.md`](./TODO.md).
+> Status: **Phase 1 complete** — app shell with tabbed navigation, theming,
+> settings, module registry, state stores, and core audio/DB engines, all tested
+> and verified on Android. See [`TODO.md`](./TODO.md).
 
 ## Tech stack
 

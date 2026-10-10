@@ -14,14 +14,15 @@ Status legend: `[x]` done · `[~]` in progress · `[ ]` pending
 - [x] Native Android debug build succeeded; app verified on emulator
 - [x] Documentation set (README, ARCHITECTURE, PROJECT_CONTEXT, TESTS, feature-documentation)
 
-## Phase 1 — Core skeleton `[ ]`
+## Phase 1 — Core skeleton `[x]`
 
-- [ ] Module registry + capability interfaces (`core/plugins`)
-- [ ] Zustand stores for player/UI state
-- [ ] Wire Drizzle `useMigrations` at app startup
-- [ ] Design-system primitives in `shared/ui` (Button, Slider, AlbumArt, Carousel)
-- [ ] Navigation shell: bottom tabs (Songs, Artists, Albums, Folders, Playlists) + stack
-- [ ] Settings screen: library mode, theme selection
+- [x] Module registry + capability interfaces (`core/plugins`)
+- [x] Zustand stores for player/UI state
+- [x] Wire Drizzle `useMigrations` at app startup (`DatabaseProvider`)
+- [x] Design-system primitives in `shared/ui` (Screen, Button, Slider, AlbumArt, ScreenHeader, EmptyState)
+- [x] Navigation shell: bottom tabs (Songs, Artists, Albums, Folders, Playlists) + stack
+- [x] Settings screen: library mode, theme selection
+- [ ] Album cover `Carousel` primitive (deferred to Phase 3 with the Albums page)
 
 ## Phase 2 — Library ingestion `[ ]`
 

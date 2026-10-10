@@ -26,6 +26,8 @@ bookkeeping locally in SQLite — no server, no network.
 - Foreign keys: tracks → artists/albums/folders; playlist_items → playlists/tracks;
   queue_items → tracks; scan_cache → folders.
 - `scan_cache` (uri, mtime, size, hash) enables incremental scans.
+- `DatabaseProvider` runs `useMigrations(db, migrations)` before rendering the
+  app and gates on `migrationState({ success, error })` (loading/ready/error).
 
 ## Edge cases
 - Unique indexes prevent duplicate tracks (by uri), artists (by name), and
@@ -33,9 +35,12 @@ bookkeeping locally in SQLite — no server, no network.
 - Deleting a folder cascades to its tracks and scan records.
 
 ## Tests
-`src/core/db/__tests__/schema.test.ts` — id generation, stable table names,
-presence of core track fields. Migration generation verified with
-`npm run db:generate` (10 tables).
+- `src/core/db/__tests__/schema.test.ts` — id generation, stable table names,
+  presence of core track fields.
+- `src/core/db/__tests__/migrationState.test.ts` — loading/ready/error logic.
+- `src/core/db/__tests__/DatabaseProvider.test.tsx` — loading/ready/error UI.
+- Migration generation verified with `npm run db:generate` (10 tables); the
+  provider runs them at startup (verified on device).
 
 ## Pending
-`useMigrations` wiring at startup, repositories, and in-memory integration tests.
+Repositories and in-memory integration tests (Phase 2).

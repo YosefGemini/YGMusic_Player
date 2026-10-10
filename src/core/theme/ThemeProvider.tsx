@@ -1,11 +1,5 @@
 import { vars } from "nativewind";
-import React, {
-  createContext,
-  useContext,
-  useMemo,
-  useState,
-  type ReactNode,
-} from "react";
+import React, { createContext, useContext, useMemo, type ReactNode } from "react";
 import { View } from "react-native";
 
 import {
@@ -25,26 +19,29 @@ const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 export interface ThemeProviderProps {
   children: ReactNode;
-  initialThemeId?: string;
+  /** Active theme id (controlled). */
+  themeId: string;
+  /** Called when the active theme changes. */
+  onThemeIdChange?: (id: string) => void;
+  /** Extra (user-installed) themes, merged with the built-ins. */
   themes?: readonly ThemeTokens[];
 }
 
 /**
  * Resolves the active theme to CSS variables at the root so every NativeWind
- * `bg-background`, `text-foreground`, `text-primary`, etc. updates instantly.
- * Additional (user-installed) themes can be passed via `themes`.
+ * `bg-background`, `text-primary`, etc. updates instantly. The selected theme
+ * is owned by the app (see `settingsStore`), keeping this provider pure.
  */
 export function ThemeProvider({
   children,
-  initialThemeId = "midnight",
+  themeId,
+  onThemeIdChange,
   themes = BUILT_IN_THEMES,
 }: ThemeProviderProps) {
-  const [themeId, setThemeId] = useState(initialThemeId);
   const theme = useMemo(() => resolveTheme(themeId, themes), [themeId, themes]);
-
   const value = useMemo<ThemeContextValue>(
-    () => ({ theme, themes, setThemeId }),
-    [theme, themes],
+    () => ({ theme, themes, setThemeId: (id) => onThemeIdChange?.(id) }),
+    [theme, themes, onThemeIdChange],
   );
 
   return (

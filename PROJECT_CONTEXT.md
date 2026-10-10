@@ -44,6 +44,9 @@ looks and behaves.
 
 ## Phase status
 
-- **Phase 0 — complete** (see `TODO.md`): toolchain, scaffold, core engines,
-  tests, docs, verified Android build and runtime.
-- Next: **Phase 1 — core skeleton** (registry, stores, DB wiring, navigation shell).
+- **Phase 0 — complete**: toolchain, scaffold, core engines, tests, docs,
+  verified Android build and runtime.
+- **Phase 1 — complete**: module registry, Zustand stores, `DatabaseProvider`
+  migrations, design system, navigation shell, settings screen; verified on device.
+- Next: **Phase 2 — library ingestion** (SAF folder picker, metadata parsing,
+  incremental scan, Folders page).

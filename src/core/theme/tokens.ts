@@ -117,6 +117,12 @@ export function themeToCssVars(theme: ThemeTokens): Record<string, string> {
   };
 }
 
+/** Converts a `r g b` triplet to a CSS `rgb()` / `rgba()` string. */
+export function tripletToColor(triplet: string, alpha = 1): string {
+  const [r, g, b] = triplet.trim().split(/\s+/).map(Number);
+  return `rgba(${r ?? 0}, ${g ?? 0}, ${b ?? 0}, ${alpha})`;
+}
+
 /** Converts `#rrggbb` / `#rgb` to a `r g b` triplet; throws on bad input. */
 export function hexToRgbTriplet(hex: string): string {
   const value = hex.replace("#", "").trim();

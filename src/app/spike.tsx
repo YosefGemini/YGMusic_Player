@@ -1,3 +1,5 @@
+import { Ionicons } from "@/shared/ui/icons";
+import { router } from "expo-router";
 import React, { useMemo, useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -19,7 +21,8 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-export default function Phase0SpikeScreen() {
+/** Developer screen: live checks for the core engines (theme, EQ, queue, audio). */
+export default function SpikeScreen() {
   const { theme, themes, setThemeId } = useTheme();
   const [queue] = useState(() => new PlayerQueue(DEMO_TRACKS, 0));
   const [snapshot, setSnapshot] = useState(() => queue.getSnapshot());
@@ -51,12 +54,22 @@ export default function Phase0SpikeScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-background">
+    <SafeAreaView className="flex-1 bg-background" edges={["top"]}>
       <ScrollView contentContainerClassName="p-5">
-        <Text className="text-2xl font-bold text-foreground">YGMusic Player</Text>
-        <Text className="mb-6 mt-1 text-sm text-muted">
-          Phase 0 spike · core engines online
-        </Text>
+        <View className="mb-6 flex-row items-center justify-between">
+          <View>
+            <Text className="text-2xl font-bold text-foreground">Engine checks</Text>
+            <Text className="mt-1 text-sm text-muted">Phase 0 spike</Text>
+          </View>
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel="Back"
+            onPress={() => router.back()}
+            className="h-10 w-10 items-center justify-center rounded-full bg-surface active:opacity-80"
+          >
+            <Ionicons name="close" size={20} className="text-foreground" />
+          </Pressable>
+        </View>
 
         <Section title="Theme engine (runtime tokens)">
           <View className="flex-row flex-wrap gap-2">
@@ -67,13 +80,13 @@ export default function Phase0SpikeScreen() {
                   key={candidate.id}
                   onPress={() => setThemeId(candidate.id)}
                   className={`rounded-full border px-4 py-2 ${
-                    active
-                      ? "border-primary bg-primary"
-                      : "border-border bg-surface"
+                    active ? "border-primary bg-primary" : "border-border bg-surface"
                   }`}
                 >
                   <Text
-                    className={`text-sm ${active ? "text-primary-foreground" : "text-foreground"}`}
+                    className={`text-sm ${
+                      active ? "text-primary-foreground" : "text-foreground"
+                    }`}
                   >
                     {candidate.name}
                   </Text>
